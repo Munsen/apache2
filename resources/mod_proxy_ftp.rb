@@ -1,14 +1,11 @@
 property :proxy_ftp_dir_charset, String,
-         default: 'UTF-8',
-         description: ''
+         default: 'UTF-8'
 
 property :proxy_ftp_escape_wildcards, String,
-         equal_to: ['on', 'off', ''],
-         default: ''
+         equal_to: ['on', 'off', '']
 
 property :proxy_ftp_list_on_wildcard, String,
-         equal_to: ['on', 'off', ''],
-         default: ''
+         equal_to: ['on', 'off', '']
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'proxy_ftp.conf') do

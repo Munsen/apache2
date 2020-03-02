@@ -6,8 +6,7 @@ property :directory_index, Array,
            index.php
            index.xhtml
            index.htm
-         ),
-         description: 'Array of directory indexes'
+         )
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'dir.conf') do

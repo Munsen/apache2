@@ -1,20 +1,19 @@
 include Apache2::Cookbook::Helpers
 
 property :index_options, Array,
-         default: %w(FancyIndexing VersionSort HTMLTable NameWidth=* DescriptionWidth=* Charset=UTF-8),
-         description: 'An array of directory indexing options. For more inforamtion see https://httpd.apache.org/docs/2.4/mod/mod_autoindex.html#indexoptions'
+         default: %w(FancyIndexing VersionSort HTMLTable NameWidth=* DescriptionWidth=* Charset=UTF-8)
 
 property :readme_name, String,
-         default: 'README.html',
-         description: 'Name of the file that will be inserted at the end of the index listing. For more information see https://httpd.apache.org/docs/2.4/mod/mod_autoindex.html#readmename'
+         default: 'README.html'
+
 
 property :header_name, String,
-         default: 'HEADER.html',
-         description: 'Header name. For more information see https://httpd.apache.org/docs/2.4/mod/mod_autoindex.html#headername'
+         default: 'HEADER.html'
+
 
 property :index_ignore, String,
-         default: '.??* *~ *# RCS CVS *,v *,t',
-         description: 'Adds to the list of files to hide when listing a directory. For more information see https://httpd.apache.org/docs/2.4/mod/mod_autoindex.html#indexignore'
+         default: '.??* *~ *# RCS CVS *,v *,t'
+
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'autoindex.conf') do

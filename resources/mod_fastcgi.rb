@@ -1,17 +1,13 @@
 include Apache2::Cookbook::Helpers
 
 property :fast_cgi_wrapper, String,
-         default: '',
-         description: 'Defaults to an empty string'
+         default: ''
 
 property :add_handler, Hash,
-         default: { 1 => 'fastcgi-script .fcgi' },
-         description: 'A key ordered hash of handlers'
+         default: { 1 => 'fastcgi-script .fcgi' }
 
 property :fast_cgi_ipc_dir, String,
-         default: lazy { ::File.join(lib_dir, 'fastcgi') },
-         description: 'FastCGI directory.
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { ::File.join(lib_dir, 'fastcgi') }
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'fastcgi.conf') do

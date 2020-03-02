@@ -1,34 +1,26 @@
 property :startservers, Integer,
-         default: 4,
-         description: 'initial number of server processes to start'
+         default: 4
 
 property :minsparethreads, Integer,
-         default: 64,
-         description: 'minimum number of worker threads which are kept spare'
+         default: 64
 
 property :maxsparethreads, Integer,
-         default: 192,
-         description: 'maximum number of worker threads which are kept spare'
+         default: 192
 
 property :threadsperchild, Integer,
-         default: 64,
-         description: 'constant number of worker threads in each server process'
+         default: 64
 
 property :maxrequestworkers, Integer,
-         default: 1024,
-         description: 'maximum number of threads'
+         default: 1024
 
 property :maxconnectionsperchild, Integer,
-         default: 0,
-         description: 'maximum number of requests a server process serves'
+         default: 0
 
 property :threadlimit, Integer,
-         default: 192,
-         description: 'ThreadsPerChild can be changed to this maximum value during a graceful restart. ThreadLimit can only be changed by stopping and starting Apache.'
+         default: 192
 
 property :serverlimit, Integer,
-         default: 16,
-         description: ''
+         default: 16
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'mpm_worker.conf') do

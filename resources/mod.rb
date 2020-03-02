@@ -1,19 +1,16 @@
 include Apache2::Cookbook::Helpers
 
 property :template, String,
-         name_property: true,
-         description: 'Name of the template '
+         name_property: true
 
 property :root_group, String,
-         default: lazy { node['root_group'] },
-         description: 'Set to override the platforms default root group for the template file'
+         default: lazy { node['root_group'] }
 
 property :template_cookbook, String,
-        default: 'apache2',
-        description: 'Cookbook containing the template file'
+        default: 'apache2'
 
 action :create do
-  template ::File.join(apache_dir, 'mods-available', "#{new_resource.template}.conf") do
+  declare_resource(:template, ::File.join(apache_dir, 'mods-available', "#{new_resource.template}.conf")) do
     source "mods/#{new_resource.template}.conf.erb"
     cookbook new_resource.template_cookbook
     owner 'root'

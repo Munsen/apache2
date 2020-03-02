@@ -1,19 +1,15 @@
 property :proxy_requests, String,
-         default: 'Off',
-         description: ''
+         default: 'Off'
 
 property :require, String,
-         default: 'all denied',
-         description: '[See mod_proxy access](https://httpd.apache.org/docs/trunk/mod/mod_proxy.html#access)'
+         default: 'all denied'
 
 property :add_default_charset, String,
-         default: 'off',
-         description: 'Add the default Charachter set'
+         default: 'off'
 
 property :proxy_via, String,
          equal_to: %w( Off On Full Block ),
-         default: 'On',
-         description: 'Enable/disable the handling of HTTP/1.1 "Via:" headers.'
+         default: 'On'
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'proxy.conf') do

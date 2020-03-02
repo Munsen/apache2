@@ -1,8 +1,7 @@
 include Apache2::Cookbook::Helpers
 
 property :types_config, String,
-         default: lazy { default_types_config },
-         description: ''
+         default: lazy { default_types_config }
 
 property :add_type, Hash,
          default: {
@@ -11,24 +10,19 @@ property :add_type, Hash,
            3 => 'application/x-gzip .gz .tgz',
            4 => 'application/x-bzip2 .bz2',
            5 => 'image/svg+xml svg svgz',
-         },
-         description: ''
+         }
 
 property :add_handler, Hash,
-         default: { 1 => 'AddHandler type-map var' },
-         description: ''
+         default: { 1 => 'AddHandler type-map var' }
 
 property :add_output_filter, Hash,
-         default: { 1 => 'INCLUDES .shtml' },
-         description: ''
+         default: { 1 => 'INCLUDES .shtml' }
 
 property :add_encoding, Hash,
-         default: { 1 => 'gzip svgz' },
-         description: ''
+         default: { 1 => 'gzip svgz' }
 
 property :add_language, Hash,
-         default: {},
-         description: 'Not currently used'
+         default: {}
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'mime.conf') do

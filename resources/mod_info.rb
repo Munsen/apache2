@@ -1,6 +1,5 @@
 property :info_allow_list, [String, Array],
-         default: %w(127.0.0.1 ::1),
-         description: ''
+         default: %w(127.0.0.1 ::1)
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'info.conf') do

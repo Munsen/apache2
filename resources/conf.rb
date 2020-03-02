@@ -1,24 +1,20 @@
 include Apache2::Cookbook::Helpers
 
 property :path, String,
-         default: lazy { "#{apache_dir}/conf-available" },
-         description: 'Path to the conf-available directory'
+         default: lazy { "#{apache_dir}/conf-available" }
 
 property :root_group, String,
-         default: lazy { node['root_group'] },
-         description: ''
+         default: lazy { node['root_group'] }
 
 property :template_cookbook, String,
-         default: 'apache2',
-         description: 'Cookbook to source the template from. Override this to provide your own template'
+         default: 'apache2'
 
 property :options, Hash,
          default: {
            server_tokens: 'Prod',
            server_signature: 'On',
            trace_enable: 'Off',
-         },
-         description: 'A hash to pass to the template'
+         }
 
 action :enable do
   template ::File.join(new_resource.path, "#{new_resource.name}.conf") do

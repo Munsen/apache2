@@ -1,14 +1,11 @@
 property :status_location, String,
-         default: '/balancer-manager',
-         description: ''
+         default: '/balancer-manager'
 
 property :set_handler, String,
-         default: 'balancer-manager',
-         description: ''
+         default: 'balancer-manager'
 
 property :require, String,
-         default: 'local',
-         description: 'For full description see https://httpd.apache.org/docs/2.4/mod/mod_authz_core.html#require'
+         default: 'local'
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'proxy_balancer.conf') do

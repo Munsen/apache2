@@ -1,26 +1,20 @@
 property :startservers, Integer,
-         default: 16,
-         description: 'number of server processes to start'
+         default: 16
 
 property :minspareservers, Integer,
-         default: 16,
-         description: 'minimum number of server processes which are kept spare'
+         default: 16
 
 property :maxspareservers, Integer,
-         default: 32,
-         description: 'maximum number of server processes which are kept spare'
+         default: 32
 
 property :serverlimit, Integer,
-         default: 256,
-         description: ''
+         default: 256
 
 property :maxrequestworkers, Integer,
-         default: 256,
-         description: 'maximum number of server processes allowed to start'
+         default: 256
 
 property :maxconnectionsperchild, Integer,
-         default: 10_000,
-         description: ''
+         default: 10_000
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'mpm_prefork.conf') do

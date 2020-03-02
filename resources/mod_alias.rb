@@ -1,21 +1,16 @@
 include Apache2::Cookbook::Helpers
 
 property :options, Array,
-         default: %w(Indexes MultiViews SymLinksIfOwnerMatch),
-         description: 'Alias options'
+         default: %w(Indexes MultiViews SymLinksIfOwnerMatch)
 
 property :icondir, String,
-         default: lazy { icon_dir },
-         description: 'The icon directory
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { icon_dir }
 
 property :allow_override, Array,
-         default: %w(None),
-         description: 'For full description see https://httpd.apache.org/docs/2.4/mod/core.html#allowoverride'
+         default: %w(None)
 
 property :require, String,
-         default: 'all granted',
-         description: 'For full description see https://httpd.apache.org/docs/2.4/mod/mod_authz_core.html#require'
+         default: 'all granted'
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'alias.conf') do

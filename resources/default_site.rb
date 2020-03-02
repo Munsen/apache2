@@ -1,49 +1,36 @@
 include Apache2::Cookbook::Helpers
 
 property :default_site_name, String,
-         default: 'default-site',
-         description: 'The default site name'
+         default: 'default-site'
 
 property :site_action, [String, Symbol],
          default: :enable,
          coerce: proc { |m| m.is_a?(String) ? m.to_i : m },
-         equal_to: %i( enable disable),
-         description: 'Enable the site. Allows you to place all the configuration on disk but not enable the site'
+         equal_to: %i( enable disable)
 
 property :port, String,
-         default: '80',
-         description: 'Listen port'
+         default: '80'
 
 property :template_cookbook, String,
-         default: 'apache2',
-         description: 'Cookbook to source the template file from'
+         default: 'apache2'
 
 property :server_admin, String,
-         default: 'root@localhost',
-         description: 'Default site contact name'
+         default: 'root@localhost'
 
 property :log_level, String,
-         default: 'warn',
-         description: 'Log level for apache2'
+         default: 'warn'
 
 property :log_dir, String,
-         default: lazy { default_log_dir },
-         description: 'Default Apache2 log directory'
+         default: lazy { default_log_dir }
 
 property :docroot_dir, String,
-         default: lazy { default_docroot_dir },
-         description: 'Apache document root.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_docroot_dir }
 
 property :apache_root_group, String,
-         default: lazy { node['root_group'] },
-         description: 'Group that the root user on the box runs as.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { node['root_group'] }
 
 property :template_source, String,
-         default: lazy { default_site_template_source },
-         description: 'Source for the template.'\
-'defaults to #{new_resource.default_site_name}.conf on Debian flavours and welcome.conf on all other platforms'
+         default: lazy { default_site_template_source }
 
 action :enable do
   template "#{new_resource.default_site_name}.conf" do

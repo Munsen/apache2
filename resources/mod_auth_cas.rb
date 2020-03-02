@@ -2,31 +2,22 @@ include Apache2::Cookbook::Helpers
 
 property :install_method, String,
          equal_to: %w( source package ),
-         default: 'package',
-         description: 'Install method for Mod auth CAS'
+         default: 'package'
 
 property :source_revision, String,
-         default: 'v1.0.9.1',
-         description: 'Revision for the mod auth cas source install'
+         default: 'v1.0.9.1'
 
 property :root_group, String,
-         default: lazy { node['root_group'] },
-         description: 'Group that the root user on the box runs as.
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { node['root_group'] }
 
 property :apache_user, String,
-         default: lazy { default_apache_user },
-         description: 'Set to override the default apache2 user.
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_apache_user }
 
 property :apache_group, String,
-         default: lazy { default_apache_group },
-         description: 'Set to override the default apache2 user.
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_apache_group }
 
 property :mpm, String,
-         default: lazy { default_mpm },
-         description: 'Apache2 MPM: used to determine which devel package to install on Debian'
+         default: lazy { default_mpm }
 
 action :install do
   if new_resource.install_method.eql? 'source'

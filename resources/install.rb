@@ -1,105 +1,74 @@
 include Apache2::Cookbook::Helpers
 
 property :root_group, String,
-         default: lazy { node['root_group'] },
-         description: 'Group that the root user on the box runs as.
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { node['root_group'] }
 
 property :apache_user, String,
-         default: lazy { default_apache_user },
-         description: 'Set to override the default apache2 user.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_apache_user }
 
 property :apache_group, String,
-         default: lazy { default_apache_group },
-         description: 'Set to override the default apache2 user.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_apache_group }
 
 property :log_dir, String,
-         default: lazy { default_log_dir },
-         description: 'Log directory location.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_log_dir }
 
 property :error_log, String,
-         default: lazy { default_error_log },
-         description: 'Error log location.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_error_log }
 
 property :log_level, String,
-         default: 'warn',
-         description: 'Log level for apache2'
+         default: 'warn'
 
 property :apache_locale, String,
-         default: 'system',
-         description: 'Locale for apache2, defaults to the system locale'
+         default: 'system'
 
 property :status_url, String,
-         default: 'http://localhost:80/server-status',
-         description: 'URL for status checks'
+         default: 'http://localhost:80/server-status'
 
 property :server_name, String,
-         default: 'localhost',
-         description: 'Sets the ServerName directive'
+         default: 'localhost'
 
 property :httpd_t_timeout, Integer,
-         default: 10,
-         description: 'Service timeout setting. Defaults to 10 seconds'
+         default: 10
 
 property :mpm, String,
-         default: lazy { default_mpm },
-         description: 'Multi-processing Module.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_mpm }
 
 property :mpm_conf, Hash,
-         default: {},
-         description: 'Multi-processing Module configuration options.'
+         default: {}
 
 property :modules, [String, Array],
-         default: lazy { default_modules },
-         description: 'List of default modules activated.'
+         default: lazy { default_modules }
 
 property :mod_conf, Hash,
-         default: {},
-         description: 'other default modules optional configuration, passed with an Hash of Hash using the module name as key.'
+         default: {}
 
 property :listen, [String, Array],
-         default: %w(80 443),
-         description: 'Port to listen on. Defaults to both 80 & 443'
+         default: %w(80 443)
 
 property :keep_alive, String,
          equal_to: %w(On Off),
-         default: 'On',
-         description: 'Persistent connection feature of HTTP/1.1 provide long-lived HTTP sessions'
+         default: 'On'
 
 property :max_keep_alive_requests, Integer,
-         default: 100,
-         description: 'MaxKeepAliveRequests'
+         default: 100
 
 property :keep_alive_timeout, Integer,
-         default: 5,
-         description: 'KeepAliveTimeout'
+         default: 5
 
 property :docroot_dir, String,
-         default: lazy { default_docroot_dir },
-         description: 'Apache document root.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_docroot_dir }
 
 property :run_dir, String,
-         default: lazy { default_run_dir },
-         description: 'Location for APACHE_RUN_DIR.'\
-'Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_run_dir }
 
 property :access_file_name, String,
-         default: '.htaccess',
-         description: 'Access filename'
+         default: '.htaccess'
 
 property :timeout, [Integer, String],
          coerce: proc { |m| m.is_a?(Integer) ? m.to_s : m },
-         default: 300,
-         description: 'The number of seconds before receives and sends time out'
+         default: 300
 
-property :sysconfig_additional_params, Hash,
-         description: 'Hash of additional sysconfig parameters to apply to the system'
+property :sysconfig_additional_params, Hash
 
 action :install do
   package [apache_pkg, perl_pkg]

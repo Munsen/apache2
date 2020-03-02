@@ -1,61 +1,48 @@
 include Apache2::Cookbook::Helpers
 
 property :apache_user, String,
-         default: lazy { default_apache_user },
-         description: ''
+         default: lazy { default_apache_user }
 
 property :apache_group, String,
-         default: lazy { default_apache_group },
-         description: ''
+         default: lazy { default_apache_group }
 
 property :mod_page_speed, String,
          equal_to: %w(on off),
-         default: 'on',
-         description: ''
+         default: 'on'
 
 property :file_cache_path, String,
-         default: '/var/cache/mod_pagespeed/',
-         description: ''
+         default: '/var/cache/mod_pagespeed/'
 
 property :output_filters, Array,
-         default: ['MOD_PAGESPEED_OUTPUT_FILTER text/html'],
-         description: ''
+         default: ['MOD_PAGESPEED_OUTPUT_FILTER text/html']
 
 property :inherit_vhost_config, String,
          default: 'on',
-         equal_to: %w(on off),
-         description: ''
+         equal_to: %w(on off)
 
 property :rewrite_level, String,
          default: '',
-         equal_to: ['', 'PassThrough', 'CoreFilters', 'TestingCoreFilters'],
-         description: 'For full info see https://www.modpagespeed.com/doc/config_filters'
+         equal_to: ['', 'PassThrough', 'CoreFilters', 'TestingCoreFilters']
 
 property :disable_filters, String,
-         default: '',
-         description: 'For full info see https://www.modpagespeed.com/doc/filters'
+         default: ''
 
 property :enable_filters, String,
-         default: '',
-         description: 'For full info see https://www.modpagespeed.com/doc/filters'
+         default: ''
 
 property :domain, String,
-         default: '',
-         description: 'For full info see https://www.modpagespeed.com/doc/domains'
+         default: ''
 
 property :extra_config, Hash,
-         default: {},
-         description: 'A hash of key value pairs for enable e.g. "ModPagespeedFileCacheSizeKb" => "102400"'
+         default: {}
 
 property :file_cache_inode_limit, [String, Integer],
          default: '500000',
-         coerce: proc { |m| m.is_a?(Integer) ? m.to_s : m },
-         description: ''
+         coerce: proc { |m| m.is_a?(Integer) ? m.to_s : m }
 
 property :avoid_renaming_introspective_javascript, String,
          equal_to: %w(on off),
-         default: 'on',
-         description: ''
+         default: 'on'
 
 property :library, Array,
         default: [
@@ -63,8 +50,7 @@ property :library, Array,
           '92501 J8KF47pYOq //ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',
           '141547 GKjMUuF4PK //ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',
           '43 1o978_K0_L http://www.modpagespeed.com/rewrite_javascript.js',
-        ],
-        description: 'Array of libraries to load in the form "bytes MD5 canonical_url" we prepend ModPagespeedLibrary'
+        ]
 
 action :create do
   remote_file "#{Chef::Config[:file_cache_path]}/mod-pagespeed.deb" do

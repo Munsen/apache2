@@ -1,21 +1,16 @@
 property :location, String,
-         default: '/server-status',
-         description: ''
+         default: '/server-status'
 
 property :status_allow_list, [String, Array],
-         default: %w(127.0.0.1 ::1),
-         description: 'Clients in the specified IP address ranges can access the resource.
-For full description see https://httpd.apache.org/docs/2.4/mod/mod_authz_core.html#require'
+         default: %w(127.0.0.1 ::1)
 
 property :extended_status, String,
          equal_to: %w(On Off),
-         default: 'Off',
-         description: 'For info see: https://httpd.apache.org/docs/current/mod/mod_status.html'
+         default: 'Off'
 
 property :proxy_status, String,
          equal_to: %w(On Off),
-         default: 'On',
-         description: 'For info see: https://httpd.apache.org/docs/current/mod/mod_status.html'
+         default: 'On'
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'status.conf') do

@@ -1,6 +1,5 @@
 property :site_name, String,
-         name_property: true,
-         description: 'Name of the site to enable/disable'
+         name_property: true
 
 action :enable do
   execute "a2ensite #{new_resource.site_name}" do

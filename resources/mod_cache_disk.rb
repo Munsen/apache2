@@ -1,17 +1,14 @@
 include Apache2::Cookbook::Helpers
 
 property :cache_root, String,
-         default: lazy { default_cache_root },
-         description: 'Root directory to keep the cache.
-Defaults to platform specific locations, see libraries/helpers.rb'
+         default: lazy { default_cache_root }
 
 property :cache_dir_levels, String,
-         default: '2',
-         description: 'https://httpd.apache.org/docs/2.4/mod/mod_cache_disk.html#cachedirlevels'
+         default: '2'
+
 
 property :cache_dir_length, String,
-         default: '2',
-         description: 'https://httpd.apache.org/docs/2.4/mod/mod_cache_disk.html#cachedirlength'
+         default: '2'
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'cache_disk.conf') do

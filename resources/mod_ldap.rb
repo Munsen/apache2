@@ -1,14 +1,11 @@
 property :location, String,
-         default: '/ldap-status',
-         description: ''
+         default: '/ldap-status'
 
 property :set_handler, String,
-         default: 'ldap-status',
-         description: ''
+         default: 'ldap-status'
 
 property :require, String,
-         default: 'local',
-         description: ''
+         default: 'local'
 
 action :create do
   template ::File.join(apache_dir, 'mods-available', 'ldap.conf') do
